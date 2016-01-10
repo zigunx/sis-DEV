@@ -27,37 +27,11 @@
                         <div id="panel_tab2_example1" class="tab-pane active">
                             <alert ng-repeat="alert in alerts" type="<%alert.type%>" close="closeAlert($index)"><%alert.msg%></alert>
                             <form class="form-horizontal" role="form" name="pegawaiForm" ng-submit="submit()" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="form-field-1"> NIP </label>
-                                    <div class="col-sm-9">
-                                        <input type='text' class='col-sm-10 form-control' name='nip' ng-model='data.nip'/>
-                                    </div>
-                                </div>
+                       
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="form-field-1"> Nama Pegawai </label>
                                     <div class="col-sm-9">
                                         <input type='text' class='col-sm-10 form-control' name='nama_pegawai' ng-model='data.nama_pegawai'/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="form-field-1"> Kelahiran </label>
-                                    <div class="col-sm-9">
-                                        <input type='text' class='col-sm-10 form-control' name='kelahiran' ng-model='data.kelahiran'/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="form-field-1"> Mata Pelajaran </label>
-                                    <div class="col-sm-9">
-                                        <input type='text' class='col-sm-10 form-control' name='matpel' ng-model='data.matpel'/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="form-field-1"> Jenis Kelamin </label>
-                                    <div class="col-sm-9">
-                                        <select name="data.id" class="form-control" ng-model="data.jk" required>
-                                            <option value="">Pilih Jenis Kelamin</option>
-                                            <option ng-repeat="unit in jk" ng-selected="unit.id == {{$data->jk}}" value="<% unit.id %>"><% unit.label %></option>
-                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
