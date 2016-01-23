@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\persyaratanRequest;
+use App\Http\Requests\PersyaratanRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\persyaratan;
-use App\Models\mahasiswa;
+use App\Models\Persyaratan;
+use App\Models\Mahasiswa;
 use Illuminate\Contracts\Auth\Guard;
 
 class persyaratanController extends Controller {
@@ -45,12 +45,8 @@ class persyaratanController extends Controller {
      *
      * @return Response
      */
-    public function create(persyaratanRequest $request) {
+    public function create(PersyaratanRequest $request) {
         //
-        $data['tanggal'] = $request->get('tanggal');
-        $data['bulan'] = $request->get('bulan');
-        $data['tahun'] = $request->get('tahun');
-        $data['fulltanggal'] = date('d F Y', strtotime($data['tanggal'] . '-' . $data['bulan'] . '-' . $data['tahun']));
         $data['mahasiswa'] = mahasiswa::with('jurusan')->where('id_jurusan', '=', $request->get('jurusan'))->orderBy('id_mahasiswa')->get();
         $data['title'] = 'Tambah persyaratan';
         if ($this->auth->user()->status == 'admin') {
@@ -66,22 +62,17 @@ class persyaratanController extends Controller {
      */
     public function store(persyaratanRequest $request) {
         //
-        $input = $request->except('_token', 'jurusan', 'tanggal', 'bulan', 'tahun');
+        $input = $request->except('_token', 'jurusan');
         $jurusan = $request->get('jurusan');
-        persyaratan::where('tanggal', '=', $request->get('tanggal'))
-                ->where('bulan', '=', $request->get('bulan'))
-                ->where('tahun', '=', $request->get('tahun'))->where('id_jurusan', '=', $jurusan)
-                ->delete();
+        
         foreach ($input as $key => $val) {
             $implode = explode('-', $key);
             $mahasiswa = $implode[1];
             $persyaratan = new persyaratan();
             $persyaratan->id_mahasiswa = $mahasiswa;
             $persyaratan->id_jurusan = $jurusan;
-            $persyaratan->tanggal = $request->get("tanggal");
-            $persyaratan->bulan = $request->get('bulan');
-            $persyaratan->tahun = $request->get('tahun');
-            $persyaratan->absen = $input[$key]['absen'];
+            
+            $persyaratan->persyaratan = $input[$key]['persyaratan'];
             $persyaratan->save();
         }
         if ($this->auth->user()->status == 'admin') {

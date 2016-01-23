@@ -13,11 +13,11 @@ class mahasiswa extends Model {
     
 
     public function jurusan() {
-        return $this->belongsTo('App\Models\jurusan', 'id_jurusan');
+        return $this->belongsTo('App\Models\Jurusan', 'id_jurusan');
     }
 
     public function persyaratan() {
-        return $this->hasMany('App\Models\persyaratan','id_mahasiswa');
+        return $this->hasMany('App\Models\Persyaratan','id_mahasiswa');
     }
 
 }

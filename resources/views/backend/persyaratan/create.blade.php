@@ -1,15 +1,15 @@
 @extends('backend/templates/index')
 @section('js')
-<script src='{{asset('assets/js/controller/admin-jurusan.js')}}'></script>
+<script src='{{asset('assets/js/controller/admin-persyaratan.js')}}'></script>
 @stop
 @section('content')
-<div class="main-content" ng-controller="jurusancreate">
+<div class="main-content" ng-controller="absensicreate">
     <div class="container">
         <!-- start: PAGE HEADER -->
         <div class="row">
             <div class="col-sm-12">
                 <!-- start: PAGE TITLE & BREADCRUMB -->
-{!! Breadcrumbs::render('jurusancreate'); !!}
+                {!! Breadcrumbs::render('persyaratancreate'); !!}
                 <div class="page-header">
                     <h1>{{$title}}</h1>
                 </div>
@@ -22,35 +22,57 @@
                     <ul class="nav nav-tabs tab-bricky" id="myTab">
                         <li class="active">
                             <a data-toggle="tab" href="#panel_tab2_example1">
-                                <i class="green fa fa-home"></i> Tambah Data jurusan
+                                <i class="green fa fa-home"></i> {{$title}} 
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div id="panel_tab2_example1" class="tab-pane active">
-                                                   <alert ng-repeat="alert in alerts" type="<%alert.type%>" close="closeAlert($index)"><% alert.msg %></alert>
-                             <form class="form-horizontal" role="form" name="agendaForm" ng-submit="submit()" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="form-field-1"> Nama jurusan </label>
-                                    <div class="col-sm-9">
-                                        <input type='text' class='col-sm-10 form-control' name='nama_jurusan' ng-model='data.nama_jurusan'/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="form-field-1"> Tahun Ajaran </label>
-                                    <div class="col-sm-9">
-                                        <input type='text' class='col-sm-10 form-control' name='tahun_ajaran' ng-model='data.tahun_ajaran'/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="form-field-1"></label>
-                                    <div class="col-sm-9">
-                                        <button class="btn btn-success" type="submit">
-                                            Save
-                                        </button>
-                                        <a href='{{route('admin.jurusan.index')}}' class="btn btn-blue">Back</a>
-                                    </div>
-                                </div>
+                            <alert ng-repeat="alert in alerts" type="<%alert.type%>" close="closeAlert($index)"><% alert.msg %></alert>
+                            <form action="" method="post">
+                                <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                                <input type="hidden" name="jurusan" value="" />
+                                <input type="hidden" name="nama_mahasiswa" value="{{" />
+                                 <table id="sample-table-1" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Jurusan</th>
+                                            <th>Nama Mahasiswa</th>
+                                            <th class="center">Kelengkapan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="center">
+                                                <label class="checkbox-inline">
+                                                <input type="checkbox" value="" name="" required>
+                                                    Foto 4x6
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" value="" name="" required>
+                                                    Fc. Ijasah
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" value="" name=""  required>
+                                                    Fc. KK
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" value="" name=""  required>
+                                                    Surat keterangan RT
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" value="" name=""  required>
+                                                    Surat Persetujuan Ortu
+                                                </label>
+                                            </td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                                <input type="submit" class="btn btn-bricky" value="Submit">
                             </form>
                         </div>
                     </div>
